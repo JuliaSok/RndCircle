@@ -1,15 +1,17 @@
 import random
+from random import randint
 import sys
 
-from PyQt5 import uic
+from uiForm import Ui_MainWindow
+
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication
 
 
-class Example(QMainWindow):
+class Example(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.circle.clicked.connect(self.paint)
 
     def paintEvent(self, event):
@@ -26,7 +28,8 @@ class Example(QMainWindow):
         d = random.randint(20, 100)
         x = random.randint(0, self.width())
         y = random.randint(0, self.height())
-        qp.setBrush(QColor(255, 255, 0))
+
+        qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
         qp.drawEllipse(x - d // 2, y - d // 2, d, d)
 
 
